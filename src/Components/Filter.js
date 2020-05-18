@@ -5,8 +5,8 @@ import BookFilter from './BookFilter';
 export default function Filter(props) {
      return (
           <div className='Filter-Section'>
-               <PrintFilter getApiFilter={props.searchBooks}></PrintFilter>
-               <BookFilter getApiFilter={props.searchBooks}></BookFilter>
+               <PrintFilter filterPrint={props.filterPrint}></PrintFilter>
+               <BookFilter filterBooks={props.filterBooks}></BookFilter>
           </div>
      )
 }

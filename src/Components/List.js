@@ -1,5 +1,5 @@
 import React from 'react';
-import ListItem from './Components/ListItem';
+import ListItem from './ListItem';
 
 export default function List(props) {
      return (
