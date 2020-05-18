@@ -20,13 +20,20 @@ export default class App extends React.Component {
   //0.saleInfo.saleability <-- Is it for sale? "NOT_FOR_SALE" - No sale, "FOR_SALE" is for sale
   //0.saleInfo.listPrice.amount <-- cost of book
   //0.saleInfo.listPrice.currencyCode <-- Type of currency, just assume USD for now
-  updateSearch = (string) => {
-
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}&filter=${this.state.bookFilter}&printType=${this.state.printFilter}`;
-    //get search string
-    //get filters here
-    //add to url
-    //fetch
+  updateSearch = (event) => {
+    event.preventDefault();
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${event.value}&filter=${this.state.bookFilter}&printType=${this.state.printFilter}`;
+    fetch(url)
+    .then (res => {
+      if (!res.ok) {
+        throw new Error('aaarrgh');
+      }
+      return res;
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+    })
   };
 
   updateBookFilter = (string) => {
@@ -36,7 +43,7 @@ export default class App extends React.Component {
   updatePrintFilter = (string) => {
 
   }
-
+/*
   componentDidMount() {
     const url = 'https://www.googleapis.com/books/v1/volumes?q=HenryVII';
     fetch (url)
@@ -51,7 +58,7 @@ export default class App extends React.Component {
       console.log(data);
     })
   }
-
+*/
   render() {
     return (
       <div className='App'>
