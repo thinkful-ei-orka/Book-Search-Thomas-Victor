@@ -7,6 +7,7 @@ import './App.css';
 export default class App extends React.Component {
   state = {
     books: [],
+    searchTerm: '',
     loading: false
   }
 
@@ -46,7 +47,7 @@ export default class App extends React.Component {
         <header className='App-header'>
           Google Book Search
         </header>
-        {/* <Search searchBooks={getBooksbyApi} />
+        {/* <Search searchTerm={this.state.searchTerm} searchBooks={getBooksbyApi} />
         <Filter searchBooks={this.getBooksbyApi} />
         <List book-list={this.state.books} /> */}
       </div>

@@ -5,17 +5,23 @@ export default function List(props) {
      return (
           <section className='List'>
                <div className='List-Items'>
-                    {props.items.map((item)=>(
+                    {props.bookList.map((book)=> {
+                    let price = "Free";
+                    if(book.saleInfo.saleability === "FOR_SALE") {
+                         price = `$${book.saleInfo.listPrice.amount}`;
+                    }
+                    
+                    return (
                          <ListItem 
-                         title={item.title}
-                         url={item.url}
-                         author={item.author}
-                         price={item.price}
-                         description={item.description}
-                         key={item.id}
+                         title={book.volumeInfo.title}
+                         url={book.volumeInfo.imagelinks.smallThumbnail}
+                         author={book.volumeInfo.authors}
+                         price={price}
+                         description={book.searchInfo.textSnippet}
+                         key={book.id}
                          />
                     )
-                    )}
+                    })}
                </div>
           </section>
      )

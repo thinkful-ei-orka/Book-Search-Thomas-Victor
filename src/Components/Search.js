@@ -2,9 +2,9 @@ import React from 'react';
 
 export default function Search(props) {
      return (
-          <div>
-               <input></input>
-               <button></button>
-          </div>
+          <form>
+               <input type='text' value={props.searchTerm} ></input>
+               <button type='submit' onSubmit={() => props.getBooksApi(this.event)}></button>
+          </form>
      )
 }
