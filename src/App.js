@@ -9,7 +9,8 @@ export default class App extends React.Component {
     searchTerm: 'henry',
     filterBooks: 'ebooks',
     filterPrint: 'all',
-    loading: false
+    loading: false,
+    error: '',
   }
 
   //0.searchInfo.textSnippet <-- search description
@@ -38,29 +39,19 @@ export default class App extends React.Component {
       console.log(this.state.books);
       console.log(data);
     })
+    .catch((Error) => {
+    this.setState({
+      error: Error.message
+    })
+  })
   };
 
-/*
-  componentDidMount() {
-    const url = 'https://www.googleapis.com/books/v1/volumes?q=HenryVII';
-    fetch (url)
-    .then (res => {
-      if (!res.ok) {
-        throw new Error('aaarrgh');
-      }
-      return res;
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-    })
-  }
-*/
   render() {
     return (
       <div className='App'>
         <header className='App-header'>
-          Google Book Search
+          <h1>Google Book Search</h1>
+          <h2>{this.state.error}</h2> 
         </header>
         <Search searchTerm={this.state.searchTerm} searchBooks={this.updateSearch} />
         <List bookList={this.state.books} />
