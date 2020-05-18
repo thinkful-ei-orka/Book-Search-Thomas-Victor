@@ -14,10 +14,10 @@ export default function List(props) {
                     return (
                          <ListItem 
                          title={book.volumeInfo.title}
-                         url={book.volumeInfo.imagelinks.smallThumbnail}
+                         url={book.volumeInfo.imageLinks.thumbnail}
                          author={book.volumeInfo.authors}
                          price={price}
-                         description={book.searchInfo.textSnippet}
+                         description={book.volumeInfo.description}
                          key={book.id}
                          />
                     )

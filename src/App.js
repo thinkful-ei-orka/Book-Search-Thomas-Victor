@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import Filter from './Components/Filter';
 import Search from './Components/Search';
 import List from './Components/List';
 
 export default class App extends React.Component {
   state = {
     books: [],
-    searchTerm: '',
+    searchTerm: 'henry',
     filterBooks: 'ebooks',
     filterPrint: 'all',
     loading: false
@@ -20,9 +19,10 @@ export default class App extends React.Component {
   //0.saleInfo.saleability <-- Is it for sale? "NOT_FOR_SALE" - No sale, "FOR_SALE" is for sale
   //0.saleInfo.listPrice.amount <-- cost of book
   //0.saleInfo.listPrice.currencyCode <-- Type of currency, just assume USD for now
-  updateSearch = (event) => {
+  updateSearch = (event, filters) => {
     event.preventDefault();
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${event.value}&filter=${this.state.bookFilter}&printType=${this.state.printFilter}`;
+    console.log(filters);
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${filters.searchTerm}&filter=${filters.filterBooks}&printType=${filters.filterPrint}`;
     fetch(url)
     .then (res => {
       if (!res.ok) {
@@ -32,17 +32,14 @@ export default class App extends React.Component {
     })
     .then(res => res.json())
     .then(data => {
+      this.setState({
+        books: data.items
+      })
+      console.log(this.state.books);
       console.log(data);
     })
   };
 
-  updateBookFilter = (string) => {
-
-  }
-
-  updatePrintFilter = (string) => {
-
-  }
 /*
   componentDidMount() {
     const url = 'https://www.googleapis.com/books/v1/volumes?q=HenryVII';
@@ -66,7 +63,6 @@ export default class App extends React.Component {
           Google Book Search
         </header>
         <Search searchTerm={this.state.searchTerm} searchBooks={this.updateSearch} />
-        <Filter filterBooks={this.updateBookFilter} filterPrint={this.updatePrintFilter}/>
         <List bookList={this.state.books} />
       </div>
     );
